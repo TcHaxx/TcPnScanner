@@ -1,0 +1,709 @@
+﻿{
+  DceRpcRequestHeader: {
+    Version: 4,
+    Flags1: 32,
+    ByteOrder: 16,
+    ObjectUUID: AACg3pds0RGCcQABAxMAKg==,
+    InterfaceUUID: AQCg3pds0RGCcQCgJELffQ==,
+    Activity: xusppQYAEBCtjuwcXS7erQ==,
+    InterfaceVersion: 1,
+    InterfaceHint: 65535,
+    ActivityHint: 65535,
+    FragmentLength: 1047
+  },
+  ArgsMaximum: 1027,
+  ArgsLength: 1027,
+  ArrayMaximumCount: 1027,
+  ArrayActualCount: 1027,
+  ARBlockReqHeader: {
+    BlockHeader: {
+      BlockType: ARBLockReq,
+      BlockLength: 67,
+      BlockVersionHigh: 1
+    },
+    ARType: 1,
+    ARUUID: Guid_1,
+    SessionKey: 1,
+    CMInitiatorMacAdd: EC1C5D2EDEAD,
+    ARUCMInitiatorObjectUUID: Guid_2,
+    ARProperties: 285212736,
+    CMInitiatorActivityTimeoutFactor: 200,
+    CMInitiatorUDPRTPort: 34962,
+    StationNameLength: 13,
+    CMInitiatorStationName: xyz-plc.pn-x1
+  },
+  IOCRBlockReqInput: {
+    BlockHeader: {
+      BlockType: IOCRBlockReq,
+      BlockLength: 164,
+      BlockVersionHigh: 1
+    },
+    IOCRType: 1,
+    IOCRReference: 1,
+    LT: 34962,
+    IOCRProperties: 2,
+    DataLength: 115,
+    FrameID: 32824,
+    SendClockFactor: 32,
+    ReductionRatio: 2,
+    Phase: 2,
+    FrameSendOffset: 4294967295,
+    WatchdogFactor: 3,
+    DataHoldFactor: 3,
+    IOCRTagHeader: 49152,
+    IOCRMultiCastMACAdd: 000000000000,
+    NumberOfAPIs: 1,
+    APIs: [
+      {
+        NumberOfIODataObjects: 14,
+        IODataObjects: [
+          {
+            SubSlotNumber: 1
+          },
+          {
+            SubSlotNumber: 32768,
+            FrameOffset: 1
+          },
+          {
+            SubSlotNumber: 32769,
+            FrameOffset: 2
+          },
+          {
+            SubSlotNumber: 32770,
+            FrameOffset: 3
+          },
+          {
+            SlotNumber: 1,
+            SubSlotNumber: 1,
+            FrameOffset: 4
+          },
+          {
+            SlotNumber: 2,
+            SubSlotNumber: 1,
+            FrameOffset: 7
+          },
+          {
+            SlotNumber: 3,
+            SubSlotNumber: 1,
+            FrameOffset: 10
+          },
+          {
+            SlotNumber: 4,
+            SubSlotNumber: 1,
+            FrameOffset: 13
+          },
+          {
+            SlotNumber: 8,
+            SubSlotNumber: 1,
+            FrameOffset: 19
+          },
+          {
+            SlotNumber: 9,
+            SubSlotNumber: 1,
+            FrameOffset: 28
+          },
+          {
+            SlotNumber: 10,
+            SubSlotNumber: 1,
+            FrameOffset: 37
+          },
+          {
+            SlotNumber: 11,
+            SubSlotNumber: 1,
+            FrameOffset: 46
+          },
+          {
+            SlotNumber: 12,
+            SubSlotNumber: 1,
+            FrameOffset: 80
+          },
+          {
+            SlotNumber: 13,
+            SubSlotNumber: 1,
+            FrameOffset: 114
+          }
+        ],
+        NumberOfIOCs: 5,
+        IOCs: [
+          {
+            SlotNumber: 5,
+            SubSlotNumber: 1,
+            FrameOffset: 16
+          },
+          {
+            SlotNumber: 6,
+            SubSlotNumber: 1,
+            FrameOffset: 17
+          },
+          {
+            SlotNumber: 7,
+            SubSlotNumber: 1,
+            FrameOffset: 18
+          },
+          {
+            SlotNumber: 11,
+            SubSlotNumber: 1,
+            FrameOffset: 79
+          },
+          {
+            SlotNumber: 12,
+            SubSlotNumber: 1,
+            FrameOffset: 113
+          }
+        ]
+      }
+    ]
+  },
+  IOCRBlockReqOutput: {
+    BlockHeader: {
+      BlockType: IOCRBlockReq,
+      BlockLength: 164,
+      BlockVersionHigh: 1
+    },
+    IOCRType: 2,
+    IOCRReference: 2,
+    LT: 34962,
+    IOCRProperties: 2,
+    DataLength: 77,
+    FrameID: 65535,
+    SendClockFactor: 32,
+    ReductionRatio: 2,
+    Phase: 2,
+    FrameSendOffset: 4294967295,
+    WatchdogFactor: 3,
+    DataHoldFactor: 3,
+    IOCRTagHeader: 49152,
+    IOCRMultiCastMACAdd: 000000000000,
+    NumberOfAPIs: 1,
+    APIs: [
+      {
+        NumberOfIODataObjects: 5,
+        IODataObjects: [
+          {
+            SlotNumber: 5,
+            SubSlotNumber: 1,
+            FrameOffset: 8
+          },
+          {
+            SlotNumber: 6,
+            SubSlotNumber: 1,
+            FrameOffset: 11
+          },
+          {
+            SlotNumber: 7,
+            SubSlotNumber: 1,
+            FrameOffset: 14
+          },
+          {
+            SlotNumber: 11,
+            SubSlotNumber: 1,
+            FrameOffset: 21
+          },
+          {
+            SlotNumber: 12,
+            SubSlotNumber: 1,
+            FrameOffset: 55
+          }
+        ],
+        NumberOfIOCs: 14,
+        IOCs: [
+          {
+            SubSlotNumber: 1
+          },
+          {
+            SubSlotNumber: 32768,
+            FrameOffset: 1
+          },
+          {
+            SubSlotNumber: 32769,
+            FrameOffset: 2
+          },
+          {
+            SubSlotNumber: 32770,
+            FrameOffset: 3
+          },
+          {
+            SlotNumber: 1,
+            SubSlotNumber: 1,
+            FrameOffset: 4
+          },
+          {
+            SlotNumber: 2,
+            SubSlotNumber: 1,
+            FrameOffset: 5
+          },
+          {
+            SlotNumber: 3,
+            SubSlotNumber: 1,
+            FrameOffset: 6
+          },
+          {
+            SlotNumber: 4,
+            SubSlotNumber: 1,
+            FrameOffset: 7
+          },
+          {
+            SlotNumber: 8,
+            SubSlotNumber: 1,
+            FrameOffset: 17
+          },
+          {
+            SlotNumber: 9,
+            SubSlotNumber: 1,
+            FrameOffset: 18
+          },
+          {
+            SlotNumber: 10,
+            SubSlotNumber: 1,
+            FrameOffset: 19
+          },
+          {
+            SlotNumber: 11,
+            SubSlotNumber: 1,
+            FrameOffset: 20
+          },
+          {
+            SlotNumber: 12,
+            SubSlotNumber: 1,
+            FrameOffset: 54
+          },
+          {
+            SlotNumber: 13,
+            SubSlotNumber: 1,
+            FrameOffset: 76
+          }
+        ]
+      }
+    ]
+  },
+  ExpectedSubmoduleBlockRequests: [
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 74,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          ModuleIdentNumber: 739072,
+          NumberOfSubmodules: 4,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 2,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            },
+            {
+              SubslotNumber: 32768,
+              SubmoduleIdentNumber: 32770,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            },
+            {
+              SubslotNumber: 32769,
+              SubmoduleIdentNumber: 49152,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            },
+            {
+              SubslotNumber: 32770,
+              SubmoduleIdentNumber: 49152,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 32,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 1,
+          ModuleIdentNumber: 19788,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 16,
+              SubmoduleProperties: 1,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                SubmoduleDataLength: 2,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 32,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 2,
+          ModuleIdentNumber: 19788,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 16,
+              SubmoduleProperties: 1,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                SubmoduleDataLength: 2,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 32,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 3,
+          ModuleIdentNumber: 19788,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 16,
+              SubmoduleProperties: 1,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                SubmoduleDataLength: 2,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 32,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 4,
+          ModuleIdentNumber: 19788,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 16,
+              SubmoduleProperties: 1,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                SubmoduleDataLength: 2,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 32,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 5,
+          ModuleIdentNumber: 19852,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 16,
+              SubmoduleProperties: 2,
+              DataDescriptionOutput: {
+                DataDescriptionType: Output,
+                SubmoduleDataLength: 2,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 32,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 6,
+          ModuleIdentNumber: 19852,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 16,
+              SubmoduleProperties: 2,
+              DataDescriptionOutput: {
+                DataDescriptionType: Output,
+                SubmoduleDataLength: 2,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 32,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 7,
+          ModuleIdentNumber: 19852,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 16,
+              SubmoduleProperties: 2,
+              DataDescriptionOutput: {
+                DataDescriptionType: Output,
+                SubmoduleDataLength: 2,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 32,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 8,
+          ModuleIdentNumber: 19039,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 4,
+              SubmoduleProperties: 1,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                SubmoduleDataLength: 8,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 32,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 9,
+          ModuleIdentNumber: 19018,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 4,
+              SubmoduleProperties: 1,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                SubmoduleDataLength: 8,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 32,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 10,
+          ModuleIdentNumber: 19056,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 4,
+              SubmoduleProperties: 1,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                SubmoduleDataLength: 8,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 38,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 11,
+          ModuleIdentNumber: 19465,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 221,
+              SubmoduleProperties: 3,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                SubmoduleDataLength: 32,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              },
+              DataDescriptionOutput: {
+                DataDescriptionType: Output,
+                SubmoduleDataLength: 32,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 38,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 12,
+          ModuleIdentNumber: 19471,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 141,
+              SubmoduleProperties: 3,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                SubmoduleDataLength: 32,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              },
+              DataDescriptionOutput: {
+                DataDescriptionType: Output,
+                SubmoduleDataLength: 20,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      BlockHeader: {
+        BlockType: ExpectedSubmoduleBlockReq,
+        BlockLength: 32,
+        BlockVersionHigh: 1
+      },
+      NumberOfAPIs: 1,
+      APIs: [
+        {
+          SlotNumber: 13,
+          ModuleIdentNumber: 18192,
+          NumberOfSubmodules: 1,
+          Submodules: [
+            {
+              SubslotNumber: 1,
+              SubmoduleIdentNumber: 64,
+              DataDescriptionInput: {
+                DataDescriptionType: Input,
+                LengthIOCS: 1,
+                LengthIOPS: 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  DestinationHardwareAddress: DEADBEEF0666,
+  IPAddress: 172.30.75.10
+}
