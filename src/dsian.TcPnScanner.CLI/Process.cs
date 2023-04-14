@@ -102,7 +102,12 @@ namespace dsian.TcPnScanner.CLI
                 return;
             }
 
-            throw new ArgumentException("Provide option -d or --capture-device if Console output is redirected");
+            if (!string.IsNullOrEmpty(cliOptions.PcapFile))
+            {
+                return;
+            }
+
+            throw new ArgumentException("Provide option '-d'/'--capture-device' or '-f'/'--pcap-file' if Console output is redirected");
         }
 
         private async Task Export(DeviceStore deviceStore)
