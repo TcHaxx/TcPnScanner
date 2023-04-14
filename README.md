@@ -32,9 +32,23 @@ sequenceDiagram
 
 ## Install
 
-> TODO:
-> Install via Nuget/Dotnet tool
-
+Install via [dotnet tool install](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-tool-install):
+```sh
+dotnet tool install dsian.TcPnScanner.CLI -g
+```
+outputs
+```sh
+You can invoke the tool using the following command: dsian.TcPnScanner.CLI
+Tool 'dsian.tcpnscanner.cli' (version '0.1.0') was successfully installed.
+```
+## Uninstall
+```sh
+dotnet tool uninstall dsian.TcPnScanner.CLI -g
+```
+outputs
+```sh
+Tool 'dsian.tcpnscanner.cli' (version '0.1.0') was successfully uninstalled.
+```
 ## Usage
 ### Options
 Option | Required | Description
