@@ -51,11 +51,8 @@ namespace dsian.TcPnScanner.CLI.Packets
                 }
                 else
                 {
-                    if (!ethPacket.HasPayloadPacket)
-                    {
-                        _logger?.LogWarning("{EthernetPacket} has no PayloadPacket", ethPacket);
-                        return;
-                    }
+                    _logger?.LogWarning("Ignoring packet: {EthernetPacket}", ethPacket);
+                    return;
                 }
             }
             catch (Exception ex)
