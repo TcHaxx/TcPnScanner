@@ -14,8 +14,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{18F48300-676E-436B-A1D4-406B794888B0}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		.gitignore = .gitignore
 		.gitattributes = .gitattributes
+		.gitignore = .gitignore
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -25,6 +25,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{EFDF194C-7BDE-4EAA-86B3-825F6B81DC03}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\cicd.yml = .github\workflows\cicd.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{9FA1B861-4FF2-42D3-8DDD-EB6DD3B6ADCF}"
+	ProjectSection(SolutionItems) = preProject
+		samples\sample-capture.pcap = samples\sample-capture.pcap
+		samples\sample-controller.xti = samples\sample-controller.xti
 	EndProjectSection
 EndProject
 Global
@@ -49,6 +55,7 @@ Global
 		{71BEFA21-3DBF-4A14-8E98-7667475634DD} = {086C93B3-6F94-4839-AFD4-4A5579447426}
 		{EA37315A-204C-4135-8839-3EFA0B6E208B} = {18B78A1B-80DD-4FD2-A252-8E5AFD76147B}
 		{EFDF194C-7BDE-4EAA-86B3-825F6B81DC03} = {FF079AF3-4AA3-45E3-A4C4-DB1E9FFCF979}
+		{9FA1B861-4FF2-42D3-8DDD-EB6DD3B6ADCF} = {18F48300-676E-436B-A1D4-406B794888B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B375C655-CEF9-4B3A-AFBA-0402F67B1D52}
