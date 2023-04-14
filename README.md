@@ -1,5 +1,5 @@
 [![CI/CD](https://github.com/TcHaxx/TcPnScanner/actions/workflows/cicd.yml/badge.svg?branch=main)](https://github.com/TcHaxx/TcPnScanner/actions/workflows/cicd.yml)
-
+[![NuGet version (dsian.TcPnScanner.CLI)](https://img.shields.io/nuget/v/dsian.TcPnScanner.CLI.svg?style=flat-square)](https://www.nuget.org/packages/dsian.TcPnScanner.CLI/)
 # TcPnScanner
 Scans a Profinet controller for requested devices and adds all stations (devices) to a Profinet IO Device (TF6270).
 
