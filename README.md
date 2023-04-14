@@ -178,9 +178,13 @@ ERROR(S):
   --version               Display version information.
 ```
 
+## Acknowledgments
+This tool uses the following open source libraries:
 
-## Credits
-* [dotpcap/sharppcap](https://github.com/dotpcap/sharppcap)
-* [commandlineparser/commandline](https://github.com/commandlineparser/commandline)
-* [VerifyTests/Verify](https://github.com/VerifyTests/Verify)
-* [Serilog](https://github.com/serilog/serilog)
+* [SharpPcap](https://github.com/dotpcap/sharppcap) - A cross-platform packet capture framework for the .NET environment.
+Packet.Net - A .NET library for working with network packets.
+* [CommandLineParser](https://github.com/commandlineparser/commandline) - A command line parsing library for .NET applications.
+* [Verify](https://github.com/VerifyTests/Verify) - A library used for snapshot testing.
+* [Serilog](https://github.com/serilog/serilog) - A logging library for .NET applications.
+
+Thanks to the developers of these libraries for their contributions to the open source community.
