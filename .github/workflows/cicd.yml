@@ -11,6 +11,11 @@ concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  dotnet_versions: |
+                   6.0.x
+                   7.0.x
+
 jobs:
   ci:
     name: CI
@@ -26,9 +31,8 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: |
-                          6.0.x
-                          7.0.x
+          dotnet-version: ${{env.dotnet_versions}}
+
       - name: Clean nuget
         run: dotnet nuget locals all --clear
       - name: Build
@@ -54,19 +58,17 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: |
-                          6.0.x
-                          7.0.x
+          dotnet-version: ${{env.dotnet_versions}}
 
       - name: Clean nuget
         run: dotnet nuget locals all --clear
       - name: Build
         run: dotnet build -c Release
 
-      # - name: publish on version change
-      #   id: publish_nuget_mock
-      #   if: ${{ success() && (github.event_name == 'push' && github.ref == 'refs/heads/main')}}
-      #   uses: alirezanet/publish-nuget@v3.0.4
-      #   with:
-      #     PROJECT_FILE_PATH: src/dsian.TwinCAT.Ads.Server.Mock/dsian.TwinCAT.Ads.Server.Mock.csproj
-      #     NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+      - name: publish on version change
+        id: publish_nuget
+        if: ${{ success() && (github.event_name == 'push' && github.ref == 'refs/heads/main')}}
+        uses: alirezanet/publish-nuget@v3.0.4
+        with:
+          PROJECT_FILE_PATH: src/dsian.TcPnScanner.CLI/dsian.TcPnScanner.CLI.csproj
+          NUGET_KEY: ${{secrets.TCHAXX_NUGET_API_KEY}}
