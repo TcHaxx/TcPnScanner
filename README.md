@@ -41,6 +41,11 @@ outputs
 You can invoke the tool using the following command: dsian.TcPnScanner.CLI
 Tool 'dsian.tcpnscanner.cli' (version '0.1.0') was successfully installed.
 ```
+## Update
+```sh
+dotnet tool update dsian.TcPnScanner.CLI -g
+```
+
 ## Uninstall
 ```sh
 dotnet tool uninstall dsian.TcPnScanner.CLI -g
@@ -49,6 +54,7 @@ outputs
 ```sh
 Tool 'dsian.tcpnscanner.cli' (version '0.1.0') was successfully uninstalled.
 ```
+
 ## Usage
 ### Options
 Option | Required | Description
