@@ -1,17 +1,22 @@
 [![CI/CD](https://github.com/TcHaxx/TcPnScanner/actions/workflows/cicd.yml/badge.svg?branch=main)](https://github.com/TcHaxx/TcPnScanner/actions/workflows/cicd.yml)
 [![NuGet version (dsian.TcPnScanner.CLI)](https://img.shields.io/nuget/v/dsian.TcPnScanner.CLI.svg?style=flat-square)](https://www.nuget.org/packages/dsian.TcPnScanner.CLI/)
 # TcPnScanner
-Scans a Profinet controller for requested devices and adds all stations (devices) to a Profinet IO Device (TF6270).
+`dsian.TcPnScanner.CLI` is a command-line tool written in C#/.NET, that scans for Profinet packets on a network interface.  
+It listens for packets, sent from a Profinet Controller (Master) to the requested devices.  
+The captured/recorded devices are then exported to a `TwinCAT Profinet IO Device (TF6270)`, as `*.xti`-file.
+
+The tool supports both Windows and Linux operating systems.
 
 ## Why?
-This is useful for virtual commissioning/digital-twin (`HiL`) projects with `Beckhoff TwinCAT`.
-It's always a huge pain to gather all required `GSDML` files and to add and configure the devices manually.
+This is useful for virtual commissioning/digital-twin (`HiL`) projects with `Beckhoff TwinCAT (TF6270)`, 
+which is simulating the physical Profinet devices.  
+It's always a huge pain to gather all required `GSDML` files and to add and configure the devices manually in `TwinCAT`.
 
 ## How?
 
 It captures the connected `Profinet Controller` (Master) with `SharpPcap` and parses the received packets.
-The captured information's are then transformed into a `*.xti` file, which can be imported into `TwinCAT` via the [Add Existing Item…](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_io_intro/1084406539.html) dialog.
-A typical handshake between the `Controller` and `TcPnScanner` looks like this:
+The captured information's are then transformed into a `*.xti` file, which can be imported into `TwinCAT` via the [Add Existing Item…](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_io_intro/1084406539.html) dialog.  
+A typical handshake between the `Controller` and `dsian.TcPnScanner.CLI` looks like this:
 ```mermaid
 sequenceDiagram
     Controller ->> TcPnScanner: Ident Req
@@ -41,6 +46,11 @@ outputs
 You can invoke the tool using the following command: dsian.TcPnScanner.CLI
 Tool 'dsian.tcpnscanner.cli' (version '0.1.0') was successfully installed.
 ```
+
+### Prerequisites
+To use `dsian.TcPnScanner.CLI`, you need to have `.NET6` or later installed on your machine.
+You can download it from the official website: https://dotnet.microsoft.com/download.
+
 ## Update
 ```sh
 dotnet tool update dsian.TcPnScanner.CLI -g
@@ -56,11 +66,86 @@ Tool 'dsian.tcpnscanner.cli' (version '0.1.0') was successfully uninstalled.
 ```
 
 ## Usage
+
+* After [installation](#installation) simply run
+    ```sh
+    dsian.TcPnScanner.CLI
+    ```
+* It will ask for a capturing device:
+    ```sh
+
+    The following devices are available on this machine:
+    ----------------------------------------------------
+
+    0) \Device\NPF_{00000000-1234-CDEF-A603-392E759CB82A} Bluetooth Device (Personal Area Network) #2
+    1) \Device\NPF_{00000001-5678-1234-BFB0-E2A6A36CE73D} Intel(R) Wi-Fi 6 AX201 160MHz
+    2) \Device\NPF_{00000002-90AB-5678-8E50-52A7B958DB2F} TwinCAT-Intel PCI Ethernet Adapter (Gigabit) V2
+    3) \Device\NPF_Loopback Adapter for loopback traffic capture
+
+
+    -- Please choose a device to capture on:
+    ```
+* Enter the number of the device, i.e. `2`.
+* Capturing starts
+    ```sh
+    [16:06:46 INF] 🎤 Selected Capture Device '\Device\NPF_{00000002-90AB-5678-8E50-52A7B958DB2F}: TwinCAT-Intel PCI Ethernet Adapter (Gigabit) V2'
+    [16:06:46 INF] Opening capture device '\Device\NPF_{00000002-90AB-5678-8E50-52A7B958DB2F}'...
+    [16:06:46 INF] Listening on \Device\NPF_{00000002-90AB-5678-8E50-52A7B958DB2F}...
+    [16:06:47 INF] 0 At: 14/04/2023 14:06:47:481: MAC:B827EB0AB747 -> MAC:0180C200000E TYP:Lldp LEN:240
+    . . . 
+    ```
+* Finished scan for devices
+    ```sh
+    [16:09:12 INF] 34 At: 14/04/2023 14:09:11:997: MAC:B827EB0AB747 -> MAC:FFFFFFFFFFFF TYP:Arp LEN:42
+    [16:09:12 INF] 35 At: 14/04/2023 14:09:11:998: MAC:B827EB0AB747 -> MAC:BEEF000018DD TYP:IPv4 LEN:418
+    [16:09:15 INF] ✨ Successfully scanned 7 device(s)!
+    ```
+* Outputs the generated `*.xti`-file
+   ```sh
+   [16:09:15 INF] 📝 Exported devices to C:\Users\densogiaichned\AppData\Local\Temp\dsian.TcPnScanner.CLI\controller (Profinet Device).xti
+   ```
+  > See [samples/sample-controller.xti](samples/sample-controller.xti).
+
+> See [Options](#options) for more options.
+
+### Piping
+This tool supports piping.  
+When the console output is redirected, only the generated `*.xti`-file is printed to console.  
+In case of a exception, the error is printed to console, and the application exits with exit code `> 0`.
+
+However, if piping is enabled, you have to specify a capture-device with [option](#options) `-d` or `-f`:
+```sh
+dsian.TcPnScanner.CLI | echo
+❌ A critical error occurred!
+Provide option '-d'/'--capture-device' or '-f'/'--pcap-file' if Console output is redirected
+```
+#### Example
+Console output is redirected / piped into `echo`:
+```sh
+dsian.TcPnScanner.CLI -f ./samples/sample-capture.pcap | echo
+```
+outputs
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" TcSmVersion="1" TcVersion="3.1.4024.0" ClassName="CDevEthernetProtocolPnSlaveDef" SubType="115">
+  <Device Id="1" DevType="115" AmsPort="65535" AmsNetId="127.0.0.1.2.1" RemoteName="">
+    <Name>__FILENAME__</Name>
+    <Image Id="1" AddrType="1" ImageType="3" SizeIn="0" SizeOut="0">
+      <Name>Image</Name>
+    </Image>
+    <Box Id="1" BoxType="9131">
+      <Name>pn-io</Name>
+    . . .
+    </Box>
+    <Profinet PLCPortNr="851" AddPortCount="1" />
+  </Device>
+</TcSmItem>
+```
 ### Options
 Option | Required | Description
 --- | --- | ---
-`-d`<br/>`--capture-device` | no | The name of the capture device to use.
-`-t`<br/>`--timeout` | no | Capture timeout in seconds.
+`-d`<br/>`--capture-device` | if piping | The name of the capture device to use.
+`-t`<br/>`--timeout` | no | Capture timeout in seconds, default 180s.
 `-f`<br/>`--pcap-file`| no | Read from a `*.pcap` capture file.
 `-o`<br/>`--out-xti-file`| no | Output directory to export the `TwinCAT` `*.xti` export file.
 `-l`<br/>`--log-level`| no | Minimum LogEventLevel, i.e. `Verbose`, `Debug`, `Information`, `Warning`, `Error`, `Fatal`.
@@ -72,7 +157,7 @@ Option | Required | Description
 
 #### Example `-d`/`--capture-device`
 Specify the name of the capture-device to use.  
-It will look in the `device-name` or `device-description` for a matching capture-device.
+It will look in the `device-name` or `device-description` section for a matching capture-device.
 
 Example, following devices are available on the machine:
 ```
@@ -177,6 +262,16 @@ ERROR(S):
 
   --version               Display version information.
 ```
+
+### Logs
+A logfile is always written, despite having the output piped into another apllication.
+The default logfile location is
+* Windows  
+    `%TEMP%/dsian.TcPnScanner.CLI/dsian.TcPnScanner.CLI-yyyyMMddhh.log`
+* Linux  
+    `/tmp/dsian.TcPnScanner.CLI/dsian.TcPnScanner.CLI-yyyyMMddhh.log`
+
+However, the logfile and loglevel can be sepcified via CLI options, see [Options](#options).
 
 ## Acknowledgments
 This tool uses the following open source libraries:
