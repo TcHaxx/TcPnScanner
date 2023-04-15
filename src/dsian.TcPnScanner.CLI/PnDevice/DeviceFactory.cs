@@ -6,14 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dsian.TcPnScanner.CLI.PnDevice
+namespace dsian.TcPnScanner.CLI.PnDevice;
+
+internal static class DeviceFactory
 {
-    internal static class DeviceFactory
+    internal static Device CreateFromPacket(ProfinetDcpIdentRequestPacket dcpIdentRequestPacket)
     {
-        internal static Device CreateFromPacket(ProfinetDcpIdentRequestPacket dcpIdentRequestPacket)
-        {
-            Guard.ThrowIfNull(dcpIdentRequestPacket.FakePhysicalAddress);
-            return new Device(dcpIdentRequestPacket.FakePhysicalAddress, dcpIdentRequestPacket.NameOfStation);
-        }
+        Guard.ThrowIfNull(dcpIdentRequestPacket.FakePhysicalAddress);
+        return new Device(dcpIdentRequestPacket.FakePhysicalAddress, dcpIdentRequestPacket.NameOfStation);
     }
 }

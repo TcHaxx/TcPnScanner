@@ -1,9 +1,8 @@
 using dsian.TcPnScanner.CLI.PnDevice;
 
-namespace dsian.TcPnScanner.CLI.Export
+namespace dsian.TcPnScanner.CLI.Export;
+
+internal interface IExporter
 {
-    internal interface IExporter
-    {
-        MemoryStream Export(IEnumerable<Device> devices);
-    }
+    MemoryStream Export(IEnumerable<Device> devices);
 }

@@ -7,13 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dsian.TcPnScanner.CLI
-{
-    internal interface ICaptureDeviceProxy : IPcapDevice
-    {
-        PcapDevice PcapDevice { get; init; }
-        void SendPacketHandler(Packet p);
+namespace dsian.TcPnScanner.CLI;
 
-        event EventHandler<Packet>? OnPacketSend;
-    }
+internal interface ICaptureDeviceProxy : IPcapDevice
+{
+    PcapDevice PcapDevice { get; init; }
+    void SendPacketHandler(Packet p);
+
+    event EventHandler<Packet>? OnPacketSend;
 }

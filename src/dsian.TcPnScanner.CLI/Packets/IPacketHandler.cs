@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dsian.TcPnScanner.CLI.Packets
+namespace dsian.TcPnScanner.CLI.Packets;
+
+public interface IPacketHandler
 {
-    public interface IPacketHandler
-    {
-        public void HandleEthernetPacket(EthernetPacket ethPacket);
-    }
+    public void HandleEthernetPacket(EthernetPacket ethPacket);
 }

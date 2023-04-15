@@ -6,118 +6,117 @@ using dsian.TcPnScanner.CLI.PnDevice;
 using Microsoft.Extensions.Logging;
 using SharpPcap.LibPcap;
 
-namespace dsian.TcPnScanner.CLI
+namespace dsian.TcPnScanner.CLI;
+
+internal sealed class Process
 {
-    internal sealed class Process
+    private LibPcapLiveDevice? _libPcapLiveDevice;
+    private readonly CliOptions _cliOptions;
+    private readonly ILogger? _logger;
+
+    internal Process(CliOptions cliOptions, ILogger? logger)
     {
-        private LibPcapLiveDevice? _libPcapLiveDevice;
-        private readonly CliOptions _cliOptions;
-        private readonly ILogger? _logger;
+        Guard.ThrowIfNull(cliOptions);
+        _cliOptions = cliOptions;
+        _logger = logger;
+    }
 
-        internal Process(CliOptions cliOptions, ILogger? logger)
+    internal async Task Start()
+    {
+
+        var capDevice = SelectCaptureDevice();
+        Guard.ThrowIfNull(capDevice);
+
+        var deviceStore = new DeviceStore();
+        using var cap = Capture.Create()
+            .WithCapturingDevice(capDevice)
+            .WithEthernetPacketHandler(new PacketHandler(capDevice, deviceStore, _logger))
+            .WithCaptureFileWriterDevice(GetCaptureFileWriter(_cliOptions))
+            .WithLogger(_logger);
+
+        Guard.ThrowIfNull(cap);
+
+        await cap.StartCaptureAndWaitUntilFininshed(TimeSpan.FromSeconds(_cliOptions.Timeout_s));
+
+        await Export(deviceStore);
+
+    }
+
+    private CaptureFileWriterDevice? GetCaptureFileWriter(CliOptions cliOptions)
+    {
+        if (!cliOptions.DumpPcap)
         {
-            Guard.ThrowIfNull(cliOptions);
-            _cliOptions = cliOptions;
-            _logger = logger;
+            return null;
         }
 
-        internal async Task Start()
+        var pcapDumpFile = cliOptions.DumpPcapFile;
+        pcapDumpFile = pcapDumpFile.Replace(Constants.TEMP_DIR_TEMPLATE, Path.GetTempPath());
+        pcapDumpFile = pcapDumpFile.Replace(Constants.APPNAME_TEMPLATE, AssemblyHelper.Name);
+        pcapDumpFile = pcapDumpFile.Replace(Constants.TIMESTAMP_TEMPLATE, DateTime.Now.ToString(Constants.TIMESTAMP_TEMPLATE));
+
+        return new CaptureFileWriterDevice(pcapDumpFile);
+    }
+
+    private ICaptureDeviceProxy? SelectCaptureDevice()
+    {
+        ThrowIfOutputRedirected(_cliOptions);
+
+        if (!string.IsNullOrWhiteSpace(_cliOptions.PcapFile))
         {
-
-            var capDevice = SelectCaptureDevice();
-            Guard.ThrowIfNull(capDevice);
-
-            var deviceStore = new DeviceStore();
-            using var cap = Capture.Create()
-                .WithCapturingDevice(capDevice)
-                .WithEthernetPacketHandler(new PacketHandler(capDevice, deviceStore, _logger))
-                .WithCaptureFileWriterDevice(GetCaptureFileWriter(_cliOptions))
-                .WithLogger(_logger);
-
-            Guard.ThrowIfNull(cap);
-
-            await cap.StartCaptureAndWaitUntilFininshed(TimeSpan.FromSeconds(_cliOptions.Timeout_s));
-
-            await Export(deviceStore);
-
+            return new CaptureDeviceProxy(new CaptureFileReaderDevice(_cliOptions.PcapFile));
         }
 
-        private CaptureFileWriterDevice? GetCaptureFileWriter(CliOptions cliOptions)
+        var pcapDevice = GetCaptureDeviceByNameOrAskUser(_cliOptions.CaptureDevice);
+        Guard.ThrowIfNull(pcapDevice);
+        _libPcapLiveDevice = pcapDevice as LibPcapLiveDevice;
+        Guard.ThrowIfNull(_libPcapLiveDevice);
+
+        var capDevice = new CaptureDeviceProxy(pcapDevice, (p) =>
         {
-            if (!cliOptions.DumpPcap)
-            {
-                return null;
-            }
+            _libPcapLiveDevice.SendPacket(p.Bytes);
+        });
+        _logger?.LogInformation($"🎤 Selected Capture Device '{capDevice.Name}{(!string.IsNullOrWhiteSpace(capDevice.Description) ? $": {capDevice.Description}" : string.Empty)}'");
 
-            var pcapDumpFile = cliOptions.DumpPcapFile;
-            pcapDumpFile = pcapDumpFile.Replace(Constants.TEMP_DIR_TEMPLATE, Path.GetTempPath());
-            pcapDumpFile = pcapDumpFile.Replace(Constants.APPNAME_TEMPLATE, AssemblyHelper.Name);
-            pcapDumpFile = pcapDumpFile.Replace(Constants.TIMESTAMP_TEMPLATE, DateTime.Now.ToString(Constants.TIMESTAMP_TEMPLATE));
+        return capDevice;
+    }
 
-            return new CaptureFileWriterDevice(pcapDumpFile);
+    private PcapDevice GetCaptureDeviceByNameOrAskUser(string selectedFromCLI)
+    {
+        if (string.IsNullOrEmpty(selectedFromCLI))
+        {
+            return CaptureDevices.AskUserForCapDevice();
         }
 
-        private ICaptureDeviceProxy? SelectCaptureDevice()
+        return CaptureDevices.FindByName(selectedFromCLI);
+    }
+
+    private void ThrowIfOutputRedirected(CliOptions cliOptions)
+    {
+        if (!Console.IsOutputRedirected)
         {
-            ThrowIfOutputRedirected(_cliOptions);
-
-            if (!string.IsNullOrWhiteSpace(_cliOptions.PcapFile))
-            {
-                return new CaptureDeviceProxy(new CaptureFileReaderDevice(_cliOptions.PcapFile));
-            }
-
-            var pcapDevice = GetCaptureDeviceByNameOrAskUser(_cliOptions.CaptureDevice);
-            Guard.ThrowIfNull(pcapDevice);
-            _libPcapLiveDevice = pcapDevice as LibPcapLiveDevice;
-            Guard.ThrowIfNull(_libPcapLiveDevice);
-
-            var capDevice = new CaptureDeviceProxy(pcapDevice, (p) =>
-            {
-                _libPcapLiveDevice.SendPacket(p.Bytes);
-            });
-            _logger?.LogInformation($"🎤 Selected Capture Device '{capDevice.Name}{(!string.IsNullOrWhiteSpace(capDevice.Description) ? $": {capDevice.Description}" : string.Empty)}'");
-
-            return capDevice;
+            return;
         }
 
-        private PcapDevice GetCaptureDeviceByNameOrAskUser(string selectedFromCLI)
+        if (!string.IsNullOrEmpty(cliOptions.CaptureDevice))
         {
-            if (string.IsNullOrEmpty(selectedFromCLI))
-            {
-                return CaptureDevices.AskUserForCapDevice();
-            }
-
-            return CaptureDevices.FindByName(selectedFromCLI);
+            return;
         }
 
-        private void ThrowIfOutputRedirected(CliOptions cliOptions)
+        if (!string.IsNullOrEmpty(cliOptions.PcapFile))
         {
-            if (!Console.IsOutputRedirected)
-            {
-                return;
-            }
-
-            if (!string.IsNullOrEmpty(cliOptions.CaptureDevice))
-            {
-                return;
-            }
-
-            if (!string.IsNullOrEmpty(cliOptions.PcapFile))
-            {
-                return;
-            }
-
-            throw new ArgumentException("Provide option '-d'/'--capture-device' or '-f'/'--pcap-file' if Console output is redirected");
+            return;
         }
 
-        private async Task Export(DeviceStore deviceStore)
-        {
-            await Exporter.ExportToFile(new XtiExporter(), deviceStore, _cliOptions, _logger);
+        throw new ArgumentException("Provide option '-d'/'--capture-device' or '-f'/'--pcap-file' if Console output is redirected");
+    }
 
-            if (Console.IsOutputRedirected)
-            {
-                await Exporter.ExportToCLI(new XtiExporter(), deviceStore, _cliOptions);
-            }
+    private async Task Export(DeviceStore deviceStore)
+    {
+        await Exporter.ExportToFile(new XtiExporter(), deviceStore, _cliOptions, _logger);
+
+        if (Console.IsOutputRedirected)
+        {
+            await Exporter.ExportToCLI(new XtiExporter(), deviceStore, _cliOptions);
         }
     }
 }
