@@ -2,6 +2,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Core;
+using Serilog.Sinks.SystemConsole.Themes;
+using System.Text;
 
 namespace dsian.TcPnScanner.CLI;
 
@@ -14,7 +16,7 @@ internal static class ServiceProviderBuilder
             {
                 return !Console.IsOutputRedirected;
             })
-            .WriteTo.File(ResolveLogFilePath(cliOptions.LogFile), rollingInterval: RollingInterval.Hour)
+            .WriteTo.File(ResolveLogFilePath(cliOptions.LogFile), rollingInterval: RollingInterval.Hour, encoding: Encoding.UTF8)
             .MinimumLevel.ControlledBy(loggingLevelSwitch)
             .CreateLogger();
 
@@ -31,6 +33,7 @@ internal static class ServiceProviderBuilder
             return logCfg;
         }
 
+        Console.OutputEncoding = Encoding.UTF8;
         return logCfg.WriteTo.Console();
     }
 

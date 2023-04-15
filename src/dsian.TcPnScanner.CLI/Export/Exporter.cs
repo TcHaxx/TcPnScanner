@@ -1,10 +1,6 @@
 using dsian.TcPnScanner.CLI.PnDevice;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace dsian.TcPnScanner.CLI.Export;
 
@@ -30,6 +26,7 @@ internal class Exporter
 
         using var ms = exporter.Export(deviceStore.GetDevices());
         using var sr = new StreamReader(ms);
+        Console.OutputEncoding = Encoding.UTF8;
         Console.WriteLine(await sr.ReadToEndAsync());
     }
 }
