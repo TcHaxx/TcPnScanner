@@ -1,0 +1,33 @@
+﻿{
+  ExitCode: 10,
+  StdOut:
+$APPNAME$ $TCPNSCANNER_VERSION$
+Copyright (c) $COPYRIGHTYEAR$ densogiaichned
+
+  -d, --capture-device    (Default: ) The name of the capture device to use.
+
+  -t, --timeout           (Default: 180) Capture timeout in seconds.
+
+  -f, --pcap-file         (Default: ) Read from a pcap capture file.
+
+  -o, --out-xti-file      (Default: %TEMP%/$APPNAME$/$CONTROLLER$.xti) Output
+                          directory to export the TwinCAT Export file.
+
+  -l, --log-level         (Default: Information) Minimum LogEventLevel
+
+  --log-file              (Default: %TEMP%/$APPNAME$/$APPNAME$-.log) Path to
+                          logfile
+
+  --dump                  (Default: false) Dump captured packets to file.
+
+  --dump-file             (Default:
+                          %TEMP%/$APPNAME$/$APPNAME$-yyyyMMddHHmmss.pcap) Pcap
+                          dump file.
+
+  --help                  Display this help screen.
+
+  --version               Display version information.
+
+,
+  StdError: 
+}

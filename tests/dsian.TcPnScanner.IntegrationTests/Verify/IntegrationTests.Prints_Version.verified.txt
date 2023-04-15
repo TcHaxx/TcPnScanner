@@ -1,0 +1,7 @@
+﻿{
+  ExitCode: 10,
+  StdOut:
+$APPNAME$ $TCPNSCANNER_VERSION$
+,
+  StdError: 
+}

@@ -1,0 +1,8 @@
+﻿{
+  ExitCode: 1,
+  StdOut: ,
+  StdError:
+? A critical error occurred!
+Provide option '-d'/'--capture-device' or '-f'/'--pcap-file' if Console output is redirected
+
+}
