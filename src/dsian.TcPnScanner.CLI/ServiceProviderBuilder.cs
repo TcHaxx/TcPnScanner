@@ -1,8 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Core;
-using Serilog.Sinks.SystemConsole.Themes;
 using System.Text;
 
 namespace dsian.TcPnScanner.CLI;

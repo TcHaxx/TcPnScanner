@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using System.Text;
-
-namespace dsian.TcPnScanner.CLI;
+﻿namespace dsian.TcPnScanner.CLI;
 
 /// <summary>
 /// CLI Helper and Extension Methods.

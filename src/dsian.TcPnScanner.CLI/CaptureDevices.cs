@@ -1,6 +1,4 @@
 using SharpPcap.LibPcap;
-using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace dsian.TcPnScanner.CLI;

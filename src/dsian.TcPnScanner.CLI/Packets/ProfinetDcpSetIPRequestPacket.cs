@@ -1,12 +1,7 @@
 using PacketDotNet;
-using System;
 using System.Buffers.Binary;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace dsian.TcPnScanner.CLI.Packets;
 

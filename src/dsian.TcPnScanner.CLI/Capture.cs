@@ -1,12 +1,9 @@
 using dsian.TcPnScanner.CLI.Packets;
-using dsian.TcPnScanner.CLI.PnDevice;
 using Microsoft.Extensions.Logging;
 using PacketDotNet;
 using SharpPcap;
 using SharpPcap.LibPcap;
 using System.Diagnostics;
-using System.Net.NetworkInformation;
-using System.Threading;
 
 namespace dsian.TcPnScanner.CLI;
 

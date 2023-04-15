@@ -1,4 +1,3 @@
-using System.Buffers.Binary;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
