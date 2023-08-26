@@ -84,10 +84,12 @@ internal class PacketHandler : IPacketHandler
         data.Add(0x0);
 
         var blockDevName = BlockDeviceNameOfStation(pnPacket).Reverse().ToArray();
+        var blockId = BlockIpNotSet();
 
-        data.AddRange(BitConverter.GetBytes((ushort)blockDevName.Length).Reverse());
+        data.AddRange(BitConverter.GetBytes(((ushort)(blockDevName.Length + blockId.Length))).Reverse());
+
         data.AddRange(blockDevName);
-        data.AddRange(BlockIpNotSet());
+        data.AddRange(blockId);
 
         responsePacket.PayloadData = data.ToArray();
         _captureDevice.SendPacketHandler(responsePacket);
