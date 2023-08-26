@@ -52,7 +52,7 @@ public class IntegrationTests : VerifyBase
         var tmpFile = Path.Join(Path.GetTempPath(), CLI.AssemblyHelper.Name, nameof(Option_O_Exports_XTI_Successfully) + Environment.Version + ".xti");
         var execResult = await Exec.ExecAsync(new(_sutExecutable), new string[] { "-f", "test-data/capture.pcap", option, tmpFile });
         Assert.True(File.Exists(tmpFile));
-        await VerifyFile(tmpFile, VerifyGlobalSettings.GetGlobalSettings())
+        await Verify(await File.ReadAllTextAsync(tmpFile), VerifyGlobalSettings.GetGlobalSettings())
             .UseParameters(option);
         File.Delete(tmpFile);
     }
