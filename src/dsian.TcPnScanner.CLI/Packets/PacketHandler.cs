@@ -86,8 +86,8 @@ internal class PacketHandler : IPacketHandler
         var blockDevName = BlockDeviceNameOfStation(pnPacket).Reverse().ToArray();
 
         data.AddRange(BitConverter.GetBytes((ushort)blockDevName.Length).Reverse());
-
         data.AddRange(blockDevName);
+        data.AddRange(BlockIpNotSet());
 
         responsePacket.PayloadData = data.ToArray();
         _captureDevice.SendPacketHandler(responsePacket);
@@ -102,7 +102,21 @@ internal class PacketHandler : IPacketHandler
         data.AddRange(BitConverter.GetBytes((ushort)(lenName + 2)).Reverse()); // DcpBlockLength
         data.AddRange(BitConverter.GetBytes((ushort)0x0)); //reserved
         data.AddRange(Encoding.UTF8.GetBytes(pnPacket.NameOfStation));
+        if (pnPacket.NameOfStation.Length % 2 != 0)
+        {
+            data.Add(0x0);      // Padding-byte if odd length
+        }
         data.Reverse();
+        return data.ToArray();
+    }
+
+    private byte[] BlockIpNotSet()
+    {
+        var data = new List<byte>();
+        data.Add(0x1);  // Option: IP
+        data.Add(0x2);  // Suboption: IP Parameter
+        data.AddRange(BitConverter.GetBytes((ushort)(14)).Reverse()); // DcpBlockLength
+        data.AddRange(Enumerable.Repeat<byte>(0x0, 14));
         return data.ToArray();
     }
 
