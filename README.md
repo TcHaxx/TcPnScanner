@@ -22,7 +22,7 @@ sequenceDiagram
     Controller ->> TcPnScanner: Ident Req
     Note right of Controller: From Raspberr_0a:b7:47 to PN-MC_00:00:00 <br/>PN-DCP:	Ident Req, Xid:0x87ee, NameOfStation:"device-a"
     TcPnScanner-->>Controller: Ident OK
-    Note left of TcPnScanner: From be:ef:00:00:87:ee to Raspberr_0a:b7:47 <br/>PN-DCP: Ident Ok , Xid:0x87ee, NameOfStation:"encotrive001"
+    Note left of TcPnScanner: From be:ef:00:00:87:ee to Raspberr_0a:b7:47 <br/>PN-DCP: Ident Ok , Xid:0x87ee, NameOfStation:"device-a", IP
     Controller ->> TcPnScanner: Set Req
     Note right of Controller: From Raspberr_0a:b7:47 to be:ef:00:00:87:ee <br/>PN-DCP: Set Req, Xid:0x87d6, IP 192.168.1.21/255.255.255.0
     TcPnScanner-->>Controller: Set OK
