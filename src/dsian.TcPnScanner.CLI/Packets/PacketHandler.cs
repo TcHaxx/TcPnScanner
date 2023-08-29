@@ -84,10 +84,11 @@ internal class PacketHandler : IPacketHandler
         data.Add(0x0);
 
         var blockDevName = BlockDeviceNameOfStation(pnPacket).Reverse().ToArray();
-
-        data.AddRange(BitConverter.GetBytes((ushort)blockDevName.Length).Reverse());
-
+        var blockIpIp = BlockIpIp().Reverse().ToArray();
+        
+        data.AddRange(BitConverter.GetBytes((ushort)(blockDevName.Length + blockIpIp.Length)).Reverse());
         data.AddRange(blockDevName);
+        data.AddRange(blockIpIp);
 
         responsePacket.PayloadData = data.ToArray();
         _captureDevice.SendPacketHandler(responsePacket);
@@ -102,6 +103,26 @@ internal class PacketHandler : IPacketHandler
         data.AddRange(BitConverter.GetBytes((ushort)(lenName + 2)).Reverse()); // DcpBlockLength
         data.AddRange(BitConverter.GetBytes((ushort)0x0)); //reserved
         data.AddRange(Encoding.UTF8.GetBytes(pnPacket.NameOfStation));
+
+        if (lenName % 2 != 0)
+        {
+            data.Add(0x0); //Padding byte
+        }
+        
+        data.Reverse();
+        return data.ToArray();
+    }
+
+    private byte[] BlockIpIp()
+    {
+        var data = new List<byte>();
+        data.Add(0x1);  // Option: IP
+        data.Add(0x2);  // Suboption: IP Parameter
+        data.AddRange(BitConverter.GetBytes((ushort)14).Reverse()); // DcpBlockLength
+        data.AddRange(BitConverter.GetBytes((ushort)0x0000).Reverse()); // IP not set
+        data.AddRange(BitConverter.GetBytes((uint)0x00000000).Reverse()); // IP Address
+        data.AddRange(BitConverter.GetBytes((uint)0x00000000).Reverse()); // Subnet Mask
+        data.AddRange(BitConverter.GetBytes((uint)0x00000000).Reverse()); // Gateway
         data.Reverse();
         return data.ToArray();
     }
