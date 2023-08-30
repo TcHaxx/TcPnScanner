@@ -25,8 +25,8 @@ internal class XtiExporter : IExporter
     {
         var tcSmItem = Create();
 
-        var boxes = new List<TcSmItemDeviceBox>(devices.Count());
-        foreach (var device in devices)
+        var boxes = new List<TcSmItemDeviceBox>(devices.Count(x => x.PnIoConnectRequestPacket is not null));
+        foreach (var device in devices.Where(x => x.PnIoConnectRequestPacket is not null))
         {
             var box = new TcSmItemDeviceBox
             {
