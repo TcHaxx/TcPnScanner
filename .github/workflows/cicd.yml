@@ -69,7 +69,7 @@ jobs:
       - name: publish on version change
         id: publish_nuget
         if: ${{ success() && (github.event_name == 'push' && github.ref == 'refs/heads/main')}}
-        uses: alirezanet/publish-nuget@v3.0.4
+        uses: alirezanet/publish-nuget@v3.1.0
         with:
           PROJECT_FILE_PATH: src/dsian.TcPnScanner.CLI/dsian.TcPnScanner.CLI.csproj
           NUGET_KEY: ${{secrets.TCHAXX_NUGET_API_KEY}}
