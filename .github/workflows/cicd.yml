@@ -43,6 +43,7 @@ jobs:
 
 
   cd:
+    name: CD
     needs: ci
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
