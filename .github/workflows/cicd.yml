@@ -15,6 +15,7 @@ env:
   dotnet_versions: |
                    6.0.x
                    7.0.x
+                   8.0.x
 
 jobs:
   ci:
@@ -24,12 +25,12 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           lfs: true
 
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{env.dotnet_versions}}
 
@@ -53,11 +54,11 @@ jobs:
       packages: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           lfs: true
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{env.dotnet_versions}}
 
