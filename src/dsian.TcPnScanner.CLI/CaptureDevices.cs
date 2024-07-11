@@ -50,7 +50,7 @@ public static class CaptureDevices
         int i = 0;
         foreach (var dev in devices)
         {
-            sb.AppendLine($"{i}) {dev.Name} {dev.Description}");
+            sb.AppendLine($"{i}) {dev.Interface.Name} {dev.Interface.FriendlyName}");
             i++;
         }
         sb.AppendLine();
