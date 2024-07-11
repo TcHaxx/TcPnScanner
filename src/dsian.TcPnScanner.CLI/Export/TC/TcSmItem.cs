@@ -2965,6 +2965,9 @@ public partial class TcSmItemDeviceBoxProfinetAPIModuleSubModule
 
     private uint subModuleIdentNumberField;
 
+    private uint typeOfSubmoduleField;
+    private bool typeOfSubmoduleFieldSpecified;
+
     private uint subSlotNumberField;
 
     private bool isFixSubmoduleField;
@@ -3093,6 +3096,35 @@ public partial class TcSmItemDeviceBoxProfinetAPIModuleSubModule
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
+    public uint TypeOfSubModule
+    {
+        get
+        {
+            return this.typeOfSubmoduleField;
+        }
+        set
+        {
+            this.typeOfSubmoduleField = value;
+            this.typeOfSubmoduleFieldSpecified = true;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool TypeOfSubModuleSpecified
+    {
+        get
+        {
+            return this.typeOfSubmoduleFieldSpecified;
+        }
+        set
+        {
+            this.typeOfSubmoduleFieldSpecified = value;
+        }
+    }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
     public uint SubSlotNumber
     {
         get
@@ -3144,6 +3176,7 @@ public partial class TcSmItemDeviceBoxProfinetAPIModuleSubModule
         set
         {
             this.addSubModFlagsField = value;
+            this.addSubModFlagsFieldSpecified = true;
         }
     }
 

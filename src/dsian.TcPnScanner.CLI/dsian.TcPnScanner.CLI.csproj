@@ -18,7 +18,7 @@
         <Description>Scans a PROFINET and adds all Stations to a PROFINET IO Device (TF6270)</Description>
         <Copyright>Copyright (c) 2023 densogiaichned</Copyright>
         <Title>TwinCAT Profinet Device Scanner</Title>
-        <Version>0.3.1</Version>
+        <Version>0.4.0</Version>
         <AssemblyVersion>$(Version)</AssemblyVersion>
         <FileVersion>$(Version)</FileVersion>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -55,11 +55,11 @@
         <PackageReference Include="CommandLineParser" Version="2.9.1" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-        <PackageReference Include="Serilog" Version="3.1.1" />
+        <PackageReference Include="Serilog" Version="4.0.0" />
         <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
-        <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
-        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-        <PackageReference Include="SharpPcap" Version="6.2.5" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+        <PackageReference Include="SharpPcap" Version="6.3.0" />
     </ItemGroup>
 
 </Project>

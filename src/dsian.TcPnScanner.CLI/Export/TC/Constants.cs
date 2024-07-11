@@ -21,6 +21,10 @@ internal static class Constants
 
     internal const uint SUBMODULE_INDEX_START = 0x031C0000u;
 
+    internal const ushort SUBSLOT_NR_PORT1 = 32769;
+
+    internal const ushort SUBSLOT_NR_PORT2 = 32770;
+
     internal const uint BOX_IMAGE_ID = 121;
 
     internal const uint API_IMAGE_ID = 4;
@@ -35,4 +39,5 @@ internal static class Constants
     internal const uint BOX_PROFINET_FLAGS = 0x410u;
 
     internal const uint BOX_PROFINET_FRAME_OFFSET = 0x8000u;
+
 }

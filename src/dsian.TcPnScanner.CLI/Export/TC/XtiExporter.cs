@@ -184,7 +184,7 @@ internal class XtiExporter : IExporter
 
         foreach (var submodule in api.Submodules)
         {
-            subModules.Add(new TcSmItemDeviceBoxProfinetAPIModuleSubModule
+            var subModuleToAdd = new TcSmItemDeviceBoxProfinetAPIModuleSubModule
             {
                 Id = PrintAsHex(CreateModuleIndex(Constants.SUBMODULE_INDEX_START, (ushort)(submodule.SubslotNumber + 1))),
                 Name = $"Subterm {submodule.SubslotNumber}{PrintSubTermIoLabel(submodule)}",
@@ -195,7 +195,16 @@ internal class XtiExporter : IExporter
                 APINr = api.APIId,
                 APINrSpecified = api.APIId != 0,
                 Vars = GetIoVarsForSubmodule(submodule)
-            });
+
+            };
+            if (IsPortSubmodule(submodule))
+            {
+                subModuleToAdd.Name += $" (Port {submodule.SubslotNumber - (Constants.SUBSLOT_NR_PORT1 - 1)})";
+                subModuleToAdd.PortData = "";
+                subModuleToAdd.TypeOfSubModule = 2;
+                subModuleToAdd.AddSubModFlags = 28;
+            }
+            subModules.Add(subModuleToAdd);
         }
 
         return subModules.ToArray();
@@ -291,5 +300,9 @@ internal class XtiExporter : IExporter
     private static string PrintAsHex(uint index)
     {
         return $"#x{index:X08}";
+    }
+    private static bool IsPortSubmodule(in Submodule submodule)
+    {
+        return submodule.SubslotNumber >= Constants.SUBSLOT_NR_PORT1 && submodule.SubslotNumber <= Constants.SUBSLOT_NR_PORT2;
     }
 }
