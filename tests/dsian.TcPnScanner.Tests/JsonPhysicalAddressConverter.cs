@@ -5,7 +5,7 @@ namespace dsian.TcPnScanner.Tests;
 
 internal class JsonPhysicalAddressConverter : Argon.JsonConverter<PhysicalAddress>
 {
-    public override PhysicalAddress? ReadJson(JsonReader reader, Type type, PhysicalAddress? existingValue, bool hasExisting, JsonSerializer serializer)
+    public override PhysicalAddress ReadJson(JsonReader reader, Type type, PhysicalAddress? existingValue, bool hasExisting, JsonSerializer serializer)
     {
         if (reader.Value is not null and string)
         {

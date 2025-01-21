@@ -9,7 +9,6 @@ namespace dsian.TcPnScanner.CLI.PnDevice;
 /// </summary>
 /// <param name="PhysicalAddress"></param>
 /// <param name="NameOfStation"></param>
-/// <param name=""></param>
 internal record Device(PhysicalAddress PhysicalAddress, string NameOfStation)
 {
     public IPAddress IpAddress { get; set; } = IPAddress.None;

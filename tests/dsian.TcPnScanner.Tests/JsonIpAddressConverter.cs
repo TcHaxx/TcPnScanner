@@ -5,7 +5,7 @@ namespace dsian.TcPnScanner.Tests;
 
 internal class JsonIpAddressConverter : Argon.JsonConverter<System.Net.IPAddress>
 {
-    public override IPAddress? ReadJson(JsonReader reader, Type type, IPAddress? existingValue, bool hasExisting, JsonSerializer serializer)
+    public override IPAddress ReadJson(JsonReader reader, Type type, IPAddress? existingValue, bool hasExisting, JsonSerializer serializer)
     {
         if (reader.Value is not null and string)
         {
